@@ -74,4 +74,7 @@
 	<class name="wind_estimation" type="mavros::std_plugins::WindEstimationPlugin" base_class_type="mavros::plugin::PluginBase">
 		<description>Publish wind estimates</description>
 	</class>
+	<class name="mount_control" type="mavros::std_plugins::MountControlPlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>Publish home position</description>
+	</class>
 </library>
