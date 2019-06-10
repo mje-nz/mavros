@@ -1,7 +1,7 @@
 /**
  * @brief MountControl plugin
  * @file mount_control.cpp
- * @author Matthew Edwards (mje-nz)
+ * @author Matthew Edwards (matthew@matthewedwards.co.nz)
  *
  * @addtogroup plugin
  * @{
@@ -29,13 +29,13 @@ namespace std_plugins {
 class MountControlPlugin : public plugin::PluginBase {
 public:
 	MountControlPlugin() :
-		nh("~")
+		mount_control_nh("~")
 	{ }
 
 	void initialize(UAS &uas_)
 	{
 		PluginBase::initialize(uas_);
-		sub = nh.subscribe("mount_control", 10, &MountControlPlugin::mount_control_cb, this);
+        mount_control_sub = mount_control_nh.subscribe("mount_control", 10, &MountControlPlugin::mount_control_cb, this);
 	}
 
 	Subscriptions get_subscriptions() {
@@ -43,12 +43,12 @@ public:
 	}
 
 private:
-	ros::NodeHandle nh;
-	ros::Subscriber sub;
+	ros::NodeHandle mount_control_nh;
+	ros::Subscriber mount_control_sub;
 
 	void mount_control_cb(const mavros_msgs::MountControl::ConstPtr &msg) {
 		try {
-			auto client = nh.serviceClient<mavros_msgs::CommandLong>("cmd/command");
+			auto client = mount_control_nh.serviceClient<mavros_msgs::CommandLong>("cmd/command");
 
 			mavros_msgs::CommandLong cmd {};
 
