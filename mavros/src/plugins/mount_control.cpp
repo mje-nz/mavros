@@ -35,7 +35,7 @@ public:
 	void initialize(UAS &uas_)
 	{
 		PluginBase::initialize(uas_);
-        mount_control_sub = mount_control_nh.subscribe("mount_control", 10, &MountControlPlugin::mount_control_cb, this);
+        mount_control_sub = mount_control_nh.subscribe("mount_control", 1, &MountControlPlugin::mount_control_cb, this);
 	}
 
 	Subscriptions get_subscriptions() {
